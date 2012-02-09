@@ -213,7 +213,7 @@ public final class Minequery extends JavaPlugin {
 
 		if (serverPortOutside != -1)
 		{
-			// Outside port is different, override the server port
+			// Outside port is different, override the server port with the setting from config.
 			serverPort = serverPortOutside;
 			log(Level.INFO, "[Minequery] Outside port has been specified, overriding server port");
 		}
