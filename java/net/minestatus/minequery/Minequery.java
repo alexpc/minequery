@@ -54,6 +54,11 @@ public final class Minequery extends JavaPlugin {
 	 * The port of the Minecraft server.
 	 */
 	private int serverPort;
+	
+	/**
+	 * The port of the Minecraft server the outside world sees.
+	 */
+	private int serverPortOutside;
 
 	/**
 	 * The host of the Minequery server.
@@ -184,6 +189,7 @@ public final class Minequery extends JavaPlugin {
 				getConfiguration().setProperty("server.ip", "");
 				getConfiguration().setProperty("server.port", 25566);
 				getConfiguration().setProperty("server.enabled", true);
+				getConfiguration().setProperty("server.minecraftportoutside", "");
 
 				// Updater mode
 				getConfiguration().setProperty("updater.enabled", false);
@@ -201,9 +207,17 @@ public final class Minequery extends JavaPlugin {
 		getConfiguration().load();
 		serverIP = getServer().getIp();
 		serverPort = getServer().getPort();
+		serverPortOutside = getConfiguration().getInt("server.minecraftportoutside", -1);
 		minequeryIP = getConfiguration().getString("server.ip", serverIP);
 		minequeryPort = getConfiguration().getInt("server.port", 25566);
 
+		if (serverPortOutside != -1)
+		{
+			// Outside port is different, override the server port
+			serverPort = serverPortOutside;
+			log(Level.INFO, "[Minequery] Outside port has been specified, overriding server port");
+		}
+		
 		if (serverIP.equals("")) {
 			// Assume if the server IP is blank that we're listening on ANY.
 			serverIP = "ANY";
