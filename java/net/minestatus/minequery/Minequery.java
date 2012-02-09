@@ -56,7 +56,7 @@ public final class Minequery extends JavaPlugin {
 	private int serverPort;
 	
 	/**
-	 * The port of the Minecraft server the outside world sees.
+	 * The port of the Minecraft server that the outside world can see.
 	 */
 	private int serverPortOutside;
 
